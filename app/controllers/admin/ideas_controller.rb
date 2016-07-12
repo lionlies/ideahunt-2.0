@@ -1,6 +1,7 @@
-class IdeasController < ApplicationController
+class Admin::IdeasController < ApplicationController
 
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :authenticate_admin!
 
   def index
     @ideas = Idea.all
@@ -38,9 +39,9 @@ class IdeasController < ApplicationController
   end
 
   def destroy
-    @idea = current_user.ideas.find(params[:id])
+    @idea = Idea.find(params[:id])
     @idea.destroy
-    redirect_to ideas_path
+    redirect_to :back
   end
 
   private
@@ -48,4 +49,5 @@ class IdeasController < ApplicationController
   def idea_params
     params.require(:idea).permit(:title, :description)
   end
+
 end
