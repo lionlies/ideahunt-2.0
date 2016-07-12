@@ -1,6 +1,17 @@
 idea list
-
-<% @ideas.each do |idea| %>
-  <%= idea.title %>
-  <%= idea.description %>
-<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>idea</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ideas.each do |idea| %>
+      <tr>
+        <td><%= idea.title %></td>
+        <td><%= idea.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
