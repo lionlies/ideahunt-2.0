@@ -1,9 +1,11 @@
-ideas list
+<h2>admin ideas list</h2>
+
 <table class="table">
   <thead>
     <tr>
       <th>idea</th>
       <th>description</th>
+      <th>created at</th>
     </tr>
   </thead>
   <tbody>
@@ -11,6 +13,7 @@ ideas list
       <tr>
         <td><%= idea.title %></td>
         <td><%= idea.description %></td>
+        <td><%= idea.created_at.to_s(:db) %></td>
       </tr>
     <% end %>
   </tbody>
