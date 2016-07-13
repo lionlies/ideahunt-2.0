@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'ideas#index'
 
-  resources :ideas
+  resources :ideas do
+    member do
+      post :upvote
+      delete :cancel_upvote
+    end
+  end
 
   namespace :admin do
     resources :ideas
