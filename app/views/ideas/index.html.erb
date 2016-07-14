@@ -23,7 +23,7 @@
           <%# end %>
           <%# idea.comments.count %>
         </td>
-        <td class = "col-md-6"><%= idea.description %></td>
+        <td class = "col-md-6"><%= simple_format(idea.description) %></td>
         <td class = "col-md-2">
           <%# if idea.editable_by?(current_user) %>
             <%# link_to "Edit", edit_idea_path(idea), class: "btn btn-warning btn-xs" %>
