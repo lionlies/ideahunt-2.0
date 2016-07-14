@@ -1,2 +1,64 @@
-<%= @idea.title %>
-<%= simple_format(@idea.description) %>
+<div class="container col-md-6">
+
+  <div>
+    <div>
+      <br>
+      <br>
+      <b style = "font-size: 32px;"><%= @idea.title %></b>
+      &nbsp&nbsp
+      <%= link_to upvote_idea_path(@idea), method: :post do %>
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+      <% end %>
+      &nbsp
+      <%# pluralize(@idea.votes.count, "vote") %>
+      &nbsp
+      <%= link_to cancel_upvote_idea_path(@idea), method: :delete do %>
+        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+      <% end %>
+      &nbsp&nbsp&nbsp&nbsp&nbsp
+      <% if @idea.editable_by?(current_user) %>
+        <%= link_to "Edit", edit_idea_path(@idea), class: "btn btn-warning btn-xs" %>
+        <%= link_to "Delete", @idea, method: :delete, class: "btn btn-danger btn-xs", data: {confirm: "Are you sure?"} %>
+      <% end %>
+    </div>
+  </div>
+
+  <br>
+
+  <div style = "font-size: 16px; color: grey;">
+    <%= simple_format(@idea.description) %>
+  </div>
+
+  <br>
+  <br>
+
+  <div>
+    <b style = "font-size: 24px;">Comments</b>
+    &nbsp
+    <%= link_to "#" do %>
+      <i class="fa fa-comment-o" aria-hidden="true"></i>
+    <% end %>
+    <%# @idea.comments.count %>
+  </div>
+
+  <%# simple_form_for [@idea, @comment] do |f| %>
+    <%# f.input :content %>
+    <%# f.submit "Submit", data: {disable_with: "Submitting..."} %>
+  <%# end %>
+
+  <br>
+
+  <%# @comments.each do |comment| %>
+    <%# if comment.author.present? %>
+      <div class="well">
+        <%# link_to comment.author.username %>
+        <%# comment.content %>
+        <%# if comment.author == current_user %>
+          <%# link_to "Delete", idea_comment_path(@idea, comment), method: :delete, class: "btn-xs pull-right" %>
+          <%# link_to "Edit", edit_idea_comment_path(@idea, comment), class: "btn-xs pull-right" %>
+        <%# end %>
+      </div>
+    <%# end %>
+  <%# end %>
+
+</div>
