@@ -3,7 +3,7 @@ class IdeasController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @ideas = Idea.all
+    @ideas = Idea.order("votes_count desc")
   end
 
   def show

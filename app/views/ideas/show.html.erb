@@ -10,7 +10,7 @@
         <i class="fa fa-chevron-up" aria-hidden="true"></i>
       <% end %>
       &nbsp
-      <%# pluralize(@idea.votes.count, "vote") %>
+      <%= pluralize(@idea.votes.count, "vote") %>
       &nbsp
       <%= link_to cancel_upvote_idea_path(@idea), method: :delete do %>
         <i class="fa fa-chevron-down" aria-hidden="true"></i>

@@ -4,7 +4,7 @@ class Idea < ActiveRecord::Base
 
   validates :title, presence: true
   validates :description, presence: true
-  validates :description, length: {maximum: 140, too_long: "Only 140 characters allowed."}
+  validates :description, length: { maximum: 200, too_long: "Only 200 characters allowed."}
 
   def editable_by?(user)
     user && user == owner
