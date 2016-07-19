@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
 
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @ideas = Idea.order("votes_count desc")
@@ -43,40 +43,30 @@ class IdeasController < ApplicationController
     redirect_to ideas_path
   end
 
-  # def upvote
-  #   @idea= Idea.find(params[:id])
-  #
-  #   if @idea.votes.create(user_id: current_user.id)
-  #     flash[:notice] = "Thank you for voting!"
-  #     redirect_to :back
-  #   else
-  #     flash[:notice] =  "You have already voted this!"
-  #     redirect_to :back
-  #   end
-  # end
-
-
   def upvote
     @idea= Idea.find(params[:id])
+    @idea.votes.create(user_id: current_user.id)
 
-    if @idea.votes.create(user_id: current_user.id)
+    if @idea.save
       flash[:notice] = "Thank you for upvoting!"
       redirect_to :back
     else
-      flash[:notice] =  "You have already upvoted this!"
+      flash[:warning] =  "You have already upvoted this!"
       redirect_to :back
     end
   end
 
   def cancel_upvote
     @idea = Idea.find(params[:id])
-    @vote = @idea.votes(user_id: current_user.id)
+    @vote = Vote.find_by(user_id: current_user.id, idea_id: @idea.id)
 
     if @vote
       @vote.destroy
+      flash[:notice] = "You've cancelled your upvote."
       redirect_to :back
     else
-      flash[:warning] = "你沒有投過票，無法取消投票喔！"
+      flash[:warning] = "You have no upvotes to cancel."
+      redirect_to :back
     end
   end
 
