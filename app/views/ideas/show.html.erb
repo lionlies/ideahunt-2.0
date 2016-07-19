@@ -30,35 +30,7 @@
   </div>
 
   <br>
-  <br>
 
-  <div>
-    <b style = "font-size: 24px;">Comments</b>
-    &nbsp
-    <%= link_to "#" do %>
-      <i class="fa fa-comment-o" aria-hidden="true"></i>
-    <% end %>
-    <%# @idea.comments.count %>
-  </div>
-
-  <%# simple_form_for [@idea, @comment] do |f| %>
-    <%# f.input :content %>
-    <%# f.submit "Submit", data: {disable_with: "Submitting..."} %>
-  <%# end %>
-
-  <br>
-
-  <%# @comments.each do |comment| %>
-    <%# if comment.author.present? %>
-      <div class="well">
-        <%# link_to comment.author.username %>
-        <%# comment.content %>
-        <%# if comment.author == current_user %>
-          <%# link_to "Delete", idea_comment_path(@idea, comment), method: :delete, class: "btn-xs pull-right" %>
-          <%# link_to "Edit", edit_idea_comment_path(@idea, comment), class: "btn-xs pull-right" %>
-        <%# end %>
-      </div>
-    <%# end %>
-  <%# end %>
+  <%= render "disqus" %>
 
 </div>
