@@ -1,5 +1,5 @@
-<div class="container">
-  <h2>ideas list</h2>
+<div class="container-fluid">
+  <h2>Ideas List</h2>
   <div>
     <%= link_to "New idea", new_idea_path, class: "btn btn-info btn-md" %>
   </div>
@@ -11,22 +11,28 @@
           <td class = "col-md-2">
             <%= link_to "+1", upvote_idea_path(idea), method: :post, class: "btn btn-primary btn-xs" %>
             &nbsp
-            <b><%= pluralize(idea.votes.count, "vote") %></b>
+            <b><%= pluralize(idea.votes.count, "like") %></b>
             &nbsp
             <%= link_to "-1", cancel_upvote_idea_path(idea), method: :delete, class: "btn btn-default btn-xs" %>
           </td>
           <td class = "col-md-2">
-            <b><%= link_to truncate(idea.title, length: 20), idea_path(idea) %></b>
+            <b><%= link_to truncate(idea.title, length: 40), idea_path(idea) %></b>
             <br>
             <a href="<%= url_for([idea, {only_path: false}]) %>#disqus_thread"></a>
           </td>
-          <td class = "col-md-6"><%= simple_format(idea.description) %></td>
+          <td class = "col-md-5"><%= simple_format(idea.description) %></td>
           <td class = "col-md-2">
-            <% if idea.editable_by?(current_user) %>
-              <%= link_to "Edit", edit_idea_path(idea), class: "btn btn-warning btn-xs" %>
-              &nbsp
-              <%= link_to "Delete", idea_path(idea), method: :delete, class: "btn btn-danger btn-xs" %>
-            <% end %>
+            <%= idea.created_at.to_s(:long) %>
+            <div>
+              <div class="pull-right">
+                <% if idea.editable_by?(current_user) %>
+                  <%= link_to "Edit", edit_idea_path(idea), class: "btn btn-warning btn-xs" %>
+                  <%= link_to "Delete", idea_path(idea), method: :delete, class: "btn btn-danger btn-xs" %>
+                <% end %>
+              </div>
+
+            </div>
+
           </td>
         </tr>
       <% end %>

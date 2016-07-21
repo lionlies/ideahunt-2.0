@@ -1,26 +1,31 @@
-<div class="container col-md-6 col-md-offset-3">
+<div class="container col-md-10 col-md-offset-1">
 
   <div>
+    <br>
+    <br>
+    <b style = "font-size: 32px;"><%= @idea.title %></b>
+    &nbsp&nbsp
     <div>
-      <br>
-      <br>
-      <b style = "font-size: 32px;"><%= @idea.title %></b>
-      &nbsp&nbsp
       <%= link_to upvote_idea_path(@idea), method: :post do %>
         <i class="fa fa-chevron-up" aria-hidden="true"></i>
       <% end %>
       &nbsp
-      <%= pluralize(@idea.votes.count, "vote") %>
+      <%= pluralize(@idea.votes.count, "like") %>
       &nbsp
       <%= link_to cancel_upvote_idea_path(@idea), method: :delete do %>
         <i class="fa fa-chevron-down" aria-hidden="true"></i>
       <% end %>
-      &nbsp&nbsp&nbsp&nbsp&nbsp
-      <% if @idea.editable_by?(current_user) %>
-        <%= link_to "Edit", edit_idea_path(@idea), class: "btn btn-warning btn-xs" %>
-        <%= link_to "Delete", @idea, method: :delete, class: "btn btn-danger btn-xs", data: {confirm: "Are you sure?"} %>
-      <% end %>
+      <div class="pull-right">
+        <% if @idea.editable_by?(current_user) %>
+          <%= link_to "Edit", edit_idea_path(@idea), class: "btn btn-warning btn-xs" %>
+          <%= link_to "Delete", @idea, method: :delete, class: "btn btn-danger btn-xs", data: {confirm: "Are you sure?"} %>
+        <% end %>
+      </div>
+
     </div>
+
+
+
   </div>
 
   <br>
